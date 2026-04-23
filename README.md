@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🎯 TicketFlow — MERN Support Ticket Management System
 
 A professional, full-stack support ticket management system built with **MongoDB**, **Express.js**, **React**, and **Node.js** featuring real-time updates via Socket.IO.
