@@ -1,0 +1,225 @@
+# Support Ticket Management System — MERN Stack
+
+## Overview
+
+A full-stack MERN (MongoDB, Express.js, React, Node.js) web application that solves the **drawbacks of current ticket management systems**: complexity, high cost, poor UX, lack of real-time updates, missing personalization, data silos, and steep learning curves.
+
+The system is designed for small-to-medium organizations and colleges with a **premium, modern dark-mode UI** inspired by ManageEngine ServiceDesk Plus and Freshdesk.
+
+---
+
+## Problems Solved (Drawbacks of Current Systems)
+
+| Current System Drawback | Our Solution |
+|---|---|
+| Steep learning curve & complex UI | Clean, intuitive single-page dashboard |
+| Expensive SaaS pricing | Free, self-hosted open-source MERN app |
+| No real-time status updates | Socket.IO live notifications & real-time ticket feed |
+| Generic automated responses | Personalized agent notes & reply templates |
+| Data silos across tools | Unified dashboard: tickets, users, reports in one place |
+| Poor mobile responsiveness | Fully responsive layout |
+| No SLA tracking | Built-in SLA timer per ticket with color alerts |
+| No knowledge base / self-service | Integrated FAQ/Knowledge Base section |
+| Manual ticket assignment | Smart auto-assignment with workload balancing |
+| Limited analytics | Live charts: resolution time, category breakdown, agent performance |
+| No file attachment support | File/image upload on tickets |
+| No audit trail | Full ticket activity log (timeline) |
+
+---
+
+## Architecture
+
+```
+d:\Miniproject_MERN\
+├── server/                  # Node.js + Express backend
+│   ├── config/
+│   │   └── db.js            # MongoDB connection
+│   ├── middleware/
+│   │   ├── auth.js          # JWT auth middleware
+│   │   └── upload.js        # Multer file upload
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Ticket.js
+│   │   ├── Comment.js
+│   │   └── Notification.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── tickets.js
+│   │   ├── users.js
+│   │   └── notifications.js
+│   ├── socket/
+│   │   └── socketHandler.js # Socket.IO real-time events
+│   ├── .env
+│   ├── package.json
+│   └── server.js
+│
+└── client/                  # React frontend (Vite)
+    ├── public/
+    ├── src/
+    │   ├── assets/
+    │   ├── components/
+    │   │   ├── layout/
+    │   │   │   ├── Sidebar.jsx
+    │   │   │   ├── Navbar.jsx
+    │   │   │   └── Layout.jsx
+    │   │   ├── tickets/
+    │   │   │   ├── TicketCard.jsx
+    │   │   │   ├── TicketForm.jsx
+    │   │   │   ├── TicketDetail.jsx
+    │   │   │   └── TicketTimeline.jsx
+    │   │   ├── dashboard/
+    │   │   │   ├── StatsCards.jsx
+    │   │   │   ├── TicketChart.jsx
+    │   │   │   └── RecentActivity.jsx
+    │   │   ├── notifications/
+    │   │   │   └── NotificationPanel.jsx
+    │   │   └── ui/
+    │   │       ├── Badge.jsx
+    │   │       ├── Modal.jsx
+    │   │       └── Loader.jsx
+    │   ├── context/
+    │   │   ├── AuthContext.jsx
+    │   │   └── SocketContext.jsx
+    │   ├── hooks/
+    │   │   └── useTickets.js
+    │   ├── pages/
+    │   │   ├── Login.jsx
+    │   │   ├── Register.jsx
+    │   │   ├── Dashboard.jsx
+    │   │   ├── Tickets.jsx
+    │   │   ├── TicketDetail.jsx
+    │   │   ├── CreateTicket.jsx
+    │   │   ├── AdminPanel.jsx
+    │   │   ├── Profile.jsx
+    │   │   ├── Reports.jsx
+    │   │   └── KnowledgeBase.jsx
+    │   ├── services/
+    │   │   └── api.js          # Axios instance + API calls
+    │   ├── styles/
+    │   │   └── index.css       # Global CSS (dark theme design system)
+    │   ├── App.jsx
+    │   └── main.jsx
+    ├── index.html
+    └── package.json
+```
+
+---
+
+## Key Features
+
+### User Features
+- Register / Login (JWT auth with refresh tokens)
+- Create support tickets with category, priority, description, file attachment
+- Real-time ticket status updates via Socket.IO
+- SLA countdown timer per ticket
+- Comment/reply thread on each ticket
+- Feedback/rating after resolution
+- Profile management with avatar upload
+- Notification bell with real-time alerts
+- Self-service Knowledge Base search
+
+### Agent Features
+- View assigned tickets with workload indicator
+- Update ticket status: Open → In Progress → Resolved → Closed
+- Internal notes (not visible to users)
+- Respond to users directly from ticket thread
+- View own performance stats
+
+### Admin Features
+- Full dashboard: live stats, charts (Recharts)
+- Assign/reassign tickets to agents
+- Smart auto-assign (round-robin balancing)
+- User management (activate/deactivate, change roles)
+- Category & priority management
+- SLA policy configuration
+- Reports: resolution time, category breakdown, agent performance, CSAT
+- Export reports as CSV/PDF
+- Audit log of all ticket changes
+
+### Advanced / Differentiating Features
+- 🔴 **SLA Breach Alerts** — color-coded countdown, auto-escalation
+- 🔁 **Auto-assignment** — round-robin by agent workload
+- 📊 **Live Analytics Charts** — Recharts (bar, pie, line)
+- 💬 **Real-time comments** — Socket.IO
+- 📎 **File attachments** — Multer + local storage
+- 🔔 **Toast notifications** — react-hot-toast
+- 🌙 **Dark mode** — default premium dark theme
+- 🔍 **Full-text search** — across ticket title + description
+- 🗂 **Kanban-style ticket view** — drag between status columns
+- 📚 **Knowledge Base** — admin creates articles, users search
+- ⭐ **User feedback/rating** — after ticket closure
+- 📜 **Activity Timeline** — full audit trail per ticket
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 18 (Vite), React Router v6 |
+| Styling | Vanilla CSS (custom design system, dark mode) |
+| Charts | Recharts |
+| Real-time | Socket.IO client |
+| HTTP | Axios |
+| UI Notifications | react-hot-toast |
+| Drag & Drop | @dnd-kit/core |
+| Backend | Node.js, Express.js |
+| Database | MongoDB (Mongoose) |
+| Auth | JWT (access + refresh tokens), bcryptjs |
+| File Upload | Multer |
+| Real-time | Socket.IO server |
+| Email (optional) | Nodemailer |
+
+---
+
+## Proposed Changes
+
+### [NEW] Server Setup
+#### [NEW] server/package.json
+#### [NEW] server/.env
+#### [NEW] server/server.js
+#### [NEW] server/config/db.js
+#### [NEW] server/middleware/auth.js
+#### [NEW] server/middleware/upload.js
+#### [NEW] server/models/User.js
+#### [NEW] server/models/Ticket.js
+#### [NEW] server/models/Comment.js
+#### [NEW] server/models/Notification.js
+#### [NEW] server/routes/auth.js
+#### [NEW] server/routes/tickets.js
+#### [NEW] server/routes/users.js
+#### [NEW] server/routes/notifications.js
+#### [NEW] server/socket/socketHandler.js
+
+---
+
+### [NEW] Client Setup (React + Vite)
+#### [NEW] client/package.json
+#### [NEW] client/index.html
+#### [NEW] client/src/styles/index.css  ← Premium dark theme design system
+#### [NEW] All pages, components, context, hooks, services
+
+---
+
+## Verification Plan
+
+### Automated
+- Start backend: `npm run dev` in `server/`
+- Start frontend: `npm run dev` in `client/`
+- Browser subagent tests: login, create ticket, admin assign, view dashboard
+
+### Manual
+- Test 3 roles: User, Agent, Admin
+- Check Socket.IO real-time update on ticket status change
+- Check SLA timer countdown
+- Check chart rendering in Reports
+
+---
+
+## Open Questions
+
+> [!IMPORTANT]
+> **MongoDB Connection**: Do you have MongoDB installed locally, or should I configure it to use **MongoDB Atlas** (cloud, free tier)? Please share a connection URI if using Atlas, or I'll use `mongodb://localhost:27017/ticketsystem` by default.
+
+> [!NOTE]
+> The system will be initialized at `d:\Miniproject_MERN\` with two folders: `server/` and `client/`. You'll run both dev servers simultaneously.
