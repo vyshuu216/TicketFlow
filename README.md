@@ -44,6 +44,28 @@
   * Upload files to tickets and comments
 
 ---
+## 📸 Screenshots
+
+### 🔐 Login Page
+
+![Login](screenshots/login.png)
+
+### 🏠 Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### 🎟️ Ticket Creation & Tracking
+
+![Ticket](screenshots/ticket.png)
+
+### ⚙️ Support Tickets
+
+![NewTicket](screenshots/tickets.png)
+
+### 👤 User Profile
+
+![Profile](screenshots/profile.png)
+
 
 ## 🏗️ Tech Stack
 
