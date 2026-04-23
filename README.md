@@ -48,23 +48,23 @@
 
 ### 🔐 Login Page
 
-![Login](screenshots/login.png)
+![Login](screenshots/login.jpeg)
 
 ### 🏠 Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.jpeg)
 
 ### 🎟️ Ticket Creation & Tracking
 
-![Ticket](screenshots/ticket.png)
+![Ticket](screenshots/ticket.jpeg)
 
 ### ⚙️ Support Tickets
 
-![NewTicket](screenshots/tickets.png)
+![NewTicket](screenshots/tickets.jpeg)
 
 ### 👤 User Profile
 
-![Profile](screenshots/profile.png)
+![Profile](screenshots/profile.jpeg)
 
 
 ## 🏗️ Tech Stack
