@@ -1,333 +1,307 @@
+# 🎫 TicketFlow — Smart Support Ticket Management Platform
 
-# 🎯 TicketFlow — MERN Support Ticket Management System
+A modern full-stack support ticket management platform built with the **MERN Stack (MongoDB, Express.js, React.js, Node.js)**, featuring real-time collaboration, SLA monitoring, role-based access control, analytics dashboards, and knowledge base management.
 
-A professional, full-stack support ticket management system built with **MongoDB**, **Express.js**, **React**, and **Node.js** featuring real-time updates via Socket.IO.
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-- **Node.js** v18+
-- **MongoDB** (local or Atlas)
-- **npm** v9+
-
-### 1. Server Setup
-
-```bash
-cd server
-npm install
-```
-
-Edit `server/.env` if needed (default config points to `mongodb://localhost:27017/ticketsystem`).
-
-**Seed demo users:**
-```bash
-node seed.js
-```
-
-**Start server:**
-```bash
-npm run dev          # Development (with nodemon)
-# or
-npm start            # Production
-```
-
-> Server runs on **http://localhost:5000**
-
-### 2. Client Setup
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
-> Client runs on **http://localhost:5173**
+![React](https://img.shields.io/badge/React-18-blue)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)
+![Socket.IO](https://img.shields.io/badge/Socket.IO-Realtime-black)
+![JWT](https://img.shields.io/badge/Auth-JWT-orange)
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-black)
+![Render](https://img.shields.io/badge/Backend-Render-blue)
 
 ---
 
-## 🔑 Demo Credentials
+## 🌐 Live Demo
 
-| Role  | Email             | Password    |
-|-------|-------------------|-------------|
-| Admin | admin@demo.com    | password123 |
-| Agent | agent@demo.com    | password123 |
-| User  | user@demo.com     | password123 |
+### Frontend
+https://ticket-flow2.vercel.app
 
----
+### Backend API
+https://ticketflow-by4b.onrender.com
 
-## ✨ Features
-
-### Core
-- ✅ JWT Authentication (access + refresh tokens)
-- ✅ Role-based access control (User / Agent / Admin)
-- ✅ Real-time updates via Socket.IO
-- ✅ Responsive dark-mode UI (works on any device)
-
-### Tickets
-- ✅ Create, view, filter, search tickets
-- ✅ Priority levels with SLA timers (Critical: 2h, High: 8h, Medium: 24h, Low: 72h)
-- ✅ File attachments (drag & drop)
-- ✅ Status tracking (Open → In Progress → Resolved → Closed)
-- ✅ Activity timeline
-- ✅ Real-time comments with typing indicators
-- ✅ Internal notes (agents/admins only)
-- ✅ Kanban view
-- ✅ Satisfaction rating system
-
-### Users
-- ✅ User registration & login
-- ✅ Profile management with avatar upload
-- ✅ Auto-assignment of tickets to agents (round-robin by workload)
-
-### Admin
-- ✅ User management (role & status changes)
-- ✅ Ticket overview table
-- ✅ Stats & charts dashboard
-- ✅ SLA breach monitoring
-
-### Analytics
-- ✅ Daily activity charts
-- ✅ Category & priority breakdowns
-- ✅ Agent performance tracking
-- ✅ CSV export
-
-### Knowledge Base
-- ✅ Searchable FAQ articles
-- ✅ Category filtering
-- ✅ Accordion-style articles
+### Health Check
+https://ticketflow-by4b.onrender.com/api/health
 
 ---
 
-## 🏗️ Architecture
+## 📌 Project Overview
 
-```
-Miniproject_MERN/
-├── client/                    # React + Vite frontend
-│   ├── public/
-│   │   └── favicon.svg
-│   └── src/
-│       ├── components/
-│       │   ├── dashboard/     # StatsCards, TicketChart, RecentActivity
-│       │   ├── layout/        # Layout, Navbar, Sidebar (mobile-friendly)
-│       │   ├── notifications/ # NotificationPanel
-│       │   ├── tickets/       # TicketCard, TicketForm, TicketTimeline
-│       │   └── ui/            # Badge, Loader, Modal
-│       ├── context/           # AuthContext, SocketContext
-│       ├── hooks/             # useTickets
-│       ├── pages/             # All page components
-│       ├── services/          # axios API client
-│       └── styles/            # index.css (responsive dark theme)
-└── server/                    # Express.js backend
-    ├── config/                # MongoDB connection
-    ├── middleware/             # Auth (JWT), Upload (multer)
-    ├── models/                # User, Ticket, Comment, Notification, KnowledgeBase
-    ├── routes/                # auth, tickets, users, notifications, kb
-    ├── socket/                # Socket.IO event handlers
-    ├── seed.js                # Demo data seeder
-    └── server.js              # App entry point
-```
+TicketFlow is a professional support ticket management system designed to streamline issue reporting, ticket assignment, tracking, and resolution processes within organizations.
+
+The platform provides real-time updates, automated workflows, secure authentication, role-based access control, and analytics to improve support team productivity and customer satisfaction.
 
 ---
 
-## 📱 Responsive Design
+## 🚀 Key Features
 
-The UI is fully responsive:
-- **Desktop (>768px)**: Fixed sidebar, full feature layout
-- **Tablet (768–1024px)**: Collapsible charts, stacked grids
-- **Mobile (<768px)**: Hamburger menu, slide-in sidebar, mobile search
+### 🔐 Authentication & Security
 
----
+- JWT Authentication (Access & Refresh Tokens)
+- Role-Based Access Control (Admin, Agent, User)
+- Secure Password Hashing
+- Protected API Routes
+- Session Management
 
-## 🔌 API Endpoints
+### 🎟️ Ticket Management
 
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/api/auth/register` | Register user |
-| POST | `/api/auth/login` | Login |
-| POST | `/api/auth/refresh` | Refresh access token |
-| GET | `/api/auth/me` | Get current user |
-| POST | `/api/auth/logout` | Logout |
-| GET | `/api/tickets` | List tickets (filtered) |
-| POST | `/api/tickets` | Create ticket |
-| GET | `/api/tickets/stats` | Dashboard stats |
-| GET | `/api/tickets/:id` | Get ticket detail |
-| PUT | `/api/tickets/:id` | Update ticket |
-| DELETE | `/api/tickets/:id` | Delete ticket (admin) |
-| POST | `/api/tickets/:id/comments` | Add comment |
-| POST | `/api/tickets/:id/rating` | Rate & close ticket |
-| GET | `/api/users` | List users (admin) |
-| GET | `/api/users/agents` | List agents |
-| PUT | `/api/users/profile` | Update own profile |
-| POST | `/api/users/avatar` | Upload avatar |
-| GET | `/api/notifications` | Get notifications |
-| PUT | `/api/notifications/read-all` | Mark all read |
-| PUT | `/api/notifications/:id/read` | Mark one read |
-| DELETE | `/api/notifications/:id` | Delete notification |
-| GET | `/api/kb` | List KB articles |
+- Create, Update & Track Support Tickets
+- Priority-Based Ticket Handling
+- Status Workflow Management
+- File Attachments Support
+- Activity Timeline Tracking
+- Real-Time Comments
+- Ticket Search & Filtering
 
----
+### ⚡ Real-Time Collaboration
 
-## 🔧 Environment Variables
+- Socket.IO Powered Notifications
+- Instant Ticket Updates
+- Live Comment Synchronization
+- Typing Indicators
+- Real-Time Activity Tracking
 
-```env
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/ticketsystem
-JWT_SECRET=your_jwt_secret_here
-JWT_REFRESH_SECRET=your_refresh_secret_here
-JWT_EXPIRE=7d
-JWT_REFRESH_EXPIRE=30d
-NODE_ENV=development
-CLIENT_URL=http://localhost:5173
-```
-=======
-# 🎫 TicketFlow
+### 📊 Analytics Dashboard
 
-**TicketFlow** is a full-stack, real-time support ticket management system built using the **MERN stack (MongoDB, Express.js, React, Node.js)**. It is designed to streamline IT support workflows by enabling efficient ticket creation, tracking, and resolution with **role-based access control (RBAC)** and **SLA (Service Level Agreement) monitoring**.
+- Ticket Status Analytics
+- Priority & Category Breakdown
+- Agent Performance Monitoring
+- SLA Compliance Tracking
+- Interactive Charts & Reports
+
+### 📚 Knowledge Base
+
+- Searchable Help Articles
+- Category-Based Filtering
+- Self-Service Support Documentation
+- FAQ Management
+
+### 👨‍💼 Administration
+
+- User Management
+- Role Assignment
+- Ticket Monitoring
+- System Analytics
+- Performance Tracking
 
 ---
 
-## 🚀 Features
+## 🛠️ Tech Stack
 
-* 🔐 **Authentication & Authorization**
+### Frontend
 
-  * Secure login/signup using JWT
-  * Role-based access: User, Agent, Admin
+- React.js
+- Vite
+- Axios
+- React Router
+- Socket.IO Client
+- Recharts
+- CSS3
 
-* 🎟️ **Ticket Management**
+### Backend
 
-  * Create, update, assign, and track tickets
-  * Status lifecycle: Open → In Progress → Resolved → Closed
+- Node.js
+- Express.js
+- Socket.IO
+- JWT Authentication
+- Multer
+- Express Middleware
 
-* ⚡ **Real-Time Updates**
+### Database
 
-  * Instant notifications using Socket.IO
-  * Live comments and ticket updates without refresh
+- MongoDB Atlas
+- Mongoose ODM
 
-* ⏱️ **SLA Tracking**
+### Deployment
 
-  * Priority-based deadlines (Low, Medium, High, Critical)
-  * Visual alerts for SLA breaches
-
-* 🤖 **Automated Agent Assignment**
-
-  * Round-robin / workload-based assignment
-
-* 📊 **Analytics Dashboard**
-
-  * Ticket statistics by category, priority, and status
-  * Performance tracking
-
-* 📚 **Knowledge Base**
-
-  * Self-service articles to reduce duplicate tickets
-
-* 📎 **File Attachments**
-
-  * Upload files to tickets and comments
+- Vercel (Frontend)
+- Render (Backend)
 
 ---
+
 ## 📸 Screenshots
 
 ### 🔐 Login Page
 
 ![Login](screenshots/login.jpeg)
 
-### 🏠 Dashboard
+### 📊 Dashboard
 
 ![Dashboard](screenshots/dashboard.jpeg)
 
-### 🎟️ Ticket Creation & Tracking
+### 🎟️ Ticket Management
+
+![Tickets](screenshots/tickets.jpeg)
+
+### 📝 Ticket Details
 
 ![Ticket](screenshots/ticket.jpeg)
-
-### ⚙️ Support Tickets
-
-![NewTicket](screenshots/tickets.jpeg)
 
 ### 👤 User Profile
 
 ![Profile](screenshots/profile.jpeg)
 
+---
 
-## 🏗️ Tech Stack
+## 🏗️ System Architecture
 
-**Frontend:**
-
-* React.js (Vite)
-* Axios
-* Socket.IO Client
-* Recharts
-
-**Backend:**
-
-* Node.js
-* Express.js
-* MongoDB (Mongoose)
-* Socket.IO
-* JWT Authentication
+```text
+Client (React + Vite)
+          │
+          ▼
+ REST APIs + Socket.IO
+          │
+          ▼
+ Node.js + Express.js
+          │
+          ▼
+ MongoDB Atlas
+```
 
 ---
 
 ## 📂 Project Structure
 
-/client → React frontend
-/server → Node.js backend
-/models → MongoDB schemas
-/routes → API routes
-/controllers → Business logic
-
----
-
-## 🔧 Installation & Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/TicketFlow.git
-
-# Install backend dependencies
-cd server
-npm install
-
-# Install frontend dependencies
-cd ../client
-npm install
-
-# Run backend
-npm run dev
-
-# Run frontend
-npm run dev
+```text
+TicketFlow/
+│
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── styles/
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/
+│   ├── config/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── socket/
+│   ├── uploads/
+│   ├── seed.js
+│   └── server.js
+│
+├── screenshots/
+│
+└── README.md
 ```
 
 ---
 
-## 📌 Use Cases
+## 🔧 Environment Variables
 
-* IT Service Management (ITSM)
-* College/University helpdesk systems
-* Customer support platforms
-* Internal issue tracking for organizations
+### Backend (.env)
 
----
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+JWT_REFRESH_SECRET=your_refresh_secret
+JWT_EXPIRE=7d
+JWT_REFRESH_EXPIRE=30d
+CLIENT_URL=https://ticket-flow2.vercel.app
+```
 
-## 🌍 Future Enhancements
+### Frontend (.env)
 
-* Email notifications (Nodemailer)
-* AI-based ticket classification
-* Mobile app (React Native)
-* Multi-tenant support
-* OAuth integration (Google/Microsoft)
-
----
-
-## 📎 License
-
-This project is open-source and available for learning and academic purposes.
+```env
+VITE_API_URL=https://ticketflow-by4b.onrender.com/api
+VITE_SOCKET_URL=https://ticketflow-by4b.onrender.com
+```
 
 ---
 
-## 👨‍💻 Author
+## 🚀 Local Setup
 
-Developed by Srinivasa Vyshnavi
+### Clone Repository
+
+```bash
+git clone https://github.com/vyshuu216/TicketFlow.git
+cd TicketFlow
+```
+
+### Backend Setup
+
+```bash
+cd server
+
+npm install
+
+node seed.js
+
+npm run dev
+```
+
+Server will start at:
+
+```text
+http://localhost:5000
+```
+
+### Frontend Setup
+
+```bash
+cd client
+
+npm install
+
+npm run dev
+```
+
+Frontend will start at:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## 🔑 Demo Credentials
+
+| Role | Email | Password |
+|--------|--------|--------|
+| Admin | admin@demo.com | password123 |
+| Agent | agent@demo.com | password123 |
+| User | user@demo.com | password123 |
+
+---
+
+## 🎯 Use Cases
+
+- IT Service Management (ITSM)
+- College Helpdesk Systems
+- Customer Support Platforms
+- Internal Team Issue Tracking
+- Enterprise Support Portals
+
+---
+
+## 📈 Future Enhancements
+
+- AI-Based Ticket Classification
+- Email Notifications
+- Mobile Application
+- OAuth Login (Google/Microsoft)
+- Multi-Tenant Architecture
+- Advanced Reporting
+- Chatbot Integration
+- Ticket Recommendation Engine
+
+---
+
+## 👩‍💻 Author
+
+**Srinivasa Vyshnavi**
+
+GitHub: https://github.com/vyshuu216
+
+---
+
+⭐ If you found this project useful, consider giving it a star!
